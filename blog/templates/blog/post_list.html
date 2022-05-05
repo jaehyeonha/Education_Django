@@ -5,6 +5,8 @@
 <head>
     <title>Blog</title>
     <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+
+    <script src="https://kit.fontawesome.com/0e3722cf1f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -74,10 +76,18 @@
                 <h1>Blog List</h1>
                 {% for p in post_list %}
                 <div class="card mb-4">
-                    <img class="card-img-top" src="{{p.head_image.url}}" alt="Card image cap">
+                    {% if p.head_image %}
+                    <img class="card-img-top" src="{{p.head_image.url}}" alt="{{p}} head image">
+                    {% else %}
+                    <img class="car-img-top" src="https://picsum.photos/seed/{{p.id}}/800/200" alt="random_image">
+
+                    {%endif%}
                     <div class="card-body">
                         <h2 class="card-title h4">{{p.title}}</h2>
-                        <p class="card-text">{{p.content}}</p>
+                        {%if p.hook_text%}
+                            <h5 class="text-muted">{{p.hook_text}}</h5>
+                        {%endif%}
+                        <p class="card-text">{{p.content | truncatewords:45}}</p>
                         <a class="btn btn-primary" href="{{p.get_absolute_url}}">Read more →</a>
                     </div>
                     <div class="card-footer text-muted">Posted on{{p.created_at}} by <a href="#">작성자명 쓸 위치(개발예정)</a>
