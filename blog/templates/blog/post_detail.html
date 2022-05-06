@@ -6,43 +6,46 @@
 
 {% block main_area %}
         <div id="post-area">
-            <article>
-                <!-- Title-->
-                <h1 class="mt-4">{{post.title}}</h1>
-                <h5 class="text-muted">{{post.hook_text}}</h5>
-                <!--author-->
-                <p class="lead">
-                    by
-                    <a href="#">작성자명 쓸 위치(개발예정)</a>
-                </p>
-                <hr>
-                <!--Date/Time-->
-                <p>{{post.created_at}}</p>
-                <hr>
-                <!-- Preview image figure-->
-                {% if post.head_image %}
-                <img class="img-fluid rounded" src="{{post.head_image.url}}" alt="{{post.title}} head image">
-                {% else %}
-                <img class="img-fluid rounded" src="https://picsum.photos/seed/{{post.id}}/800/200" alt="random_image">
+            {% if post.category %}
+            <span class="badge badge-secondary float-right">{{ post.category }}</span>
+            {% else %}
+            <span class="badge badge-secondary float-right">미분류</span>
+            {% endif %}
+            <!-- Title-->
+            <h1 class="mt-4">{{post.title}}</h1>
+            <h5 class="text-muted">{{post.hook_text}}</h5>
+            <!--author-->
+            <p class="lead">
+                by
+                <a href="#">{{post.author|upper}}</a>
+            </p>
+            <hr>
+            <!--Date/Time-->
+            <p>{{post.created_at}}</p>
+            <hr>
+            <!-- Preview image figure-->
+            {% if post.head_image %}
+            <img class="img-fluid rounded" src="{{post.head_image.url}}" alt="{{post.title}} head image">
+            {% else %}
+            <img class="img-fluid rounded" src="https://picsum.photos/seed/{{post.id}}/800/200" alt="random_image">
+            {%endif%}
+            <!-- Post content-->
+            <p>{{post.content}}</p>
+            {% if post.file_upload %}
+            <a href="{{post.file_upload.url}}" class="btn btn-primary" role="button" download>Download
+                {% if post.get_file_ext == 'csv' %}
+                <i class="fas fa-file-csv"></i>
+                {% elif post.get_file_ext == 'xlsv' or post.get_file_ext == 'xls'%}
+                <i class="fas fa-file-excel"></i>
+                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc'%}
+                <i class="fas fa-file-word"></i>
+                {%else%}
+                <i class="far fa-file"></i>
                 {%endif%}
-                <!-- Post content-->
-                <p>{{post.content}}</p>
-                {% if post.file_upload %}
-                <a href="{{post.file_upload.url}}" class="btn btn-primary" role="button" download>Download
-                    {% if post.get_file_ext == 'csv' %}
-                    <i class="fas fa-file-csv"></i>
-                    {% elif post.get_file_ext == 'xlsv' or post.get_file_ext == 'xls'%}
-                    <i class="fas fa-file-excel"></i>
-                    {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc'%}
-                    <i class="fas fa-file-word"></i>
-                    {%else%}
-                    <i class="far fa-file"></i>
-                    {%endif%}
-                    {{post.get_file_name}}
-                </a>
-                {%endif%}
-                <hr>
-            </article>
+                {{post.get_file_name}}
+            </a>
+            {%endif%}
+            <hr>
         </div>
 
         <div id="comment-area">
