@@ -63,7 +63,7 @@ class TestView(TestCase):
         # 1.2  post_list 페이지와 똑같은 네비게이션 바가 있다.
         navbar = soup.nav  # beautifulsoup를 이용하면 간단히 페이지의 태그 요소에 접근이 가능합니다.
         self.assertIn('Blog', navbar.text)
-        self.assertIn('About Me', navbar.text)
+        self.assertIn('About me', navbar.text)
 
         # 1.3  첫 번째 post의 title이 브라우저 탭에 표기되는 페이지 title에 있다.
         self.assertIn(post_001.title, soup.title.text)
