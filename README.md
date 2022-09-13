@@ -1,3 +1,6 @@
 # HTML1
 
-djagno+bootstrap 독학
+Get It 경북대 창업동아리 운영진 교육
+djagno+bootstrap
+
+
