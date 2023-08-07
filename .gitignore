@@ -167,3 +167,5 @@ cython_debug/
 migrations/
 _media/
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+.gitignore
